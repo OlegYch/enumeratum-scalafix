@@ -1,0 +1,8 @@
+.bsp
+.idea
+.bloop
+.metals
+target/
+logs
+*.sc
+*.semanticdb
