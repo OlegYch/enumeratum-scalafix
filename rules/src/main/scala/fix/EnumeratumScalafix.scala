@@ -64,13 +64,16 @@ class EnumeratumScalafix extends SemanticRule("EnumeratumScalafix") {
         val bodyPatches = enums.collect { case (None, t) =>
           Patch.addRight(t, t.syntax + "\n")
         }
-        val id          =
+        val classDef    =
           if (withId) s"abstract class ${o.name}(val id: Int)"
           else s"trait ${o.name}"
-        Patch.addLeft(o, s"sealed $id extends enumeratum.EnumEntry\n") +
+        val idMap       =
+          if (withId) "  lazy val apply = values.map(v => v.id -> v).toMap\n"
+          else ""
+        Patch.addLeft(o, s"sealed $classDef extends enumeratum.EnumEntry\n") +
           Patch.replaceTree(
             o,
-            s"object ${o.name} extends enumeratum.Enum[${o.name}] {\n  lazy val values = findValues\n\n"
+            s"object ${o.name} extends enumeratum.Enum[${o.name}] {\n  type Value = ${o.name}\n${idMap}  lazy val values = findValues\n\n"
           ) ++
           bodyPatches ++
           enumPatches +

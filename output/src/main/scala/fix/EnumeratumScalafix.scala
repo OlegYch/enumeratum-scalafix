@@ -2,6 +2,8 @@ package fix
 
 sealed abstract class A(val id: Int) extends enumeratum.EnumEntry
 object A extends enumeratum.Enum[A] {
+  type Value = A
+  lazy val apply = values.map(v => v.id -> v).toMap
   lazy val values = findValues
 
   case object X extends A(0)
@@ -20,6 +22,7 @@ x()
 
 sealed trait NoId extends enumeratum.EnumEntry
 object NoId extends enumeratum.Enum[NoId] {
+  type Value = NoId
   lazy val values = findValues
 
   case object A extends NoId
