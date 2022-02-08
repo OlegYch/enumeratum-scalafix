@@ -56,7 +56,7 @@ class EnumeratumScalafix extends SemanticRule("EnumeratumScalafix") {
               s"  case object ${e.name} extends ${o.name.value}$id" + e.nameOverride
                 .filter(_ != e.name)
                 .map { name =>
-                  " {\n    override val entryName = \"" + name + "\"\n  }\n"
+                  " {\n    override val toString = \"" + name + "\"\n  }\n"
                 }
                 .getOrElse("\n")
             Patch.addRight(a, code)

@@ -9,10 +9,10 @@ object A extends enumeratum.Enum[A] {
 
   case object X extends A(0)
   case object Y extends A(1) {
-    override val entryName = "x"
+    override val toString = "x"
   }
   case object Z extends A(2) {
-    override val entryName = "Zed"
+    override val toString = "Zed"
   }
   case object ZZ extends A(3)
 val a = 1
