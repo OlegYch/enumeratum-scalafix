@@ -3,7 +3,8 @@ package fix
 sealed abstract class A(val id: Int) extends enumeratum.EnumEntry
 object A extends enumeratum.Enum[A] {
   type Value = A
-  lazy val apply = values.map(v => v.id -> v).toMap
+  lazy val byId = values.map(v => v.id -> v).toMap
+  def apply(id: Int) = byId(id)
   lazy val values = findValues
 
   case object X extends A(0)

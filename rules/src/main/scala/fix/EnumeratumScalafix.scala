@@ -68,7 +68,7 @@ class EnumeratumScalafix extends SemanticRule("EnumeratumScalafix") {
           if (withId) s"abstract class ${o.name}(val id: Int)"
           else s"trait ${o.name}"
         val idMap       =
-          if (withId) "  lazy val apply = values.map(v => v.id -> v).toMap\n"
+          if (withId) "  lazy val byId = values.map(v => v.id -> v).toMap\n  def apply(id: Int) = byId(id)\n"
           else ""
         Patch.addLeft(o, s"sealed $classDef extends enumeratum.EnumEntry\n") +
           Patch.replaceTree(
