@@ -23,7 +23,7 @@ lazy val `enumeratum-scalafix` = (project in file("."))
 lazy val rules = projectMatrix
   .settings(
     name := "enumeratum-scalafix",
-    moduleName := "scalafix",
+    moduleName := "enumeratum-scalafix",
     libraryDependencies += "ch.epfl.scala" %% "scalafix-core" % V.scalafixVersion,
     Compile / resourceGenerators += Def.task {
       val rules = (Compile / compile).value
