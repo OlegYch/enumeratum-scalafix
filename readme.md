@@ -11,5 +11,5 @@ Note: comments and custom formatting inside Enumerations will be removed.
 To run:
 ```
 sbt 
-scalafix dependency:EnumeratumScalafix@io.github.olegych:enumeratum-scalafix:VERSION
+scalafixAll dependency:EnumeratumScalafix@io.github.olegych:enumeratum-scalafix:VERSION
 ```
